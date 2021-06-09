@@ -3,17 +3,17 @@ name: CD
 on:
   push:
     branches:
-      - main
+      - production
 
 jobs:
   deploy:
-    if: github.ref == 'refs/heads/main' # Only run this job if it is on the main branch
+    if: github.ref == 'refs/heads/production' # Only run this job if it is on the main branch
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: main # Checkout main instead of the latest commit
+          ref: production # Checkout main instead of the latest commit
           fetch-depth: 0 # Checkout the whole branch
 
       - uses: actions/setup-python@v2
