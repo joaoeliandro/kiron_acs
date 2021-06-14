@@ -5,8 +5,10 @@ defmodule KironAcsWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", KironAcsWeb do
+  scope "/", KironAcsWeb do
     pipe_through :api
+
+    post "/agents", AgentsController, :create
   end
 
   # Enables LiveDashboard only for development

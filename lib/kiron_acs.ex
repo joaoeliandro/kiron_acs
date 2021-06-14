@@ -1,9 +1,5 @@
 defmodule KironAcs do
-  @moduledoc """
-  KironAcs keeps the contexts that define your domain
-  and business logic.
+  alias KironAcs.Agents.Create, as: AgentCreate
 
-  Contexts are also responsible for managing your data, regardless
-  if it comes from the database, an external API or others.
-  """
+  defdelegate create_agent(params), to: AgentCreate, as: :call
 end
