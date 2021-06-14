@@ -8,8 +8,11 @@
 use Mix.Config
 
 config :kiron_acs,
-  ecto_repos: [KironAcs.Repo],
-  generators: [binary_id: true]
+  ecto_repos: [KironAcs.Repo]
+
+config :kiron_acs, KironAcs.Repo,
+  migration_primary_key: [type: :binary_id],
+  migration_foreign_key: [type: :binary_id]
 
 # Configures the endpoint
 config :kiron_acs, KironAcsWeb.Endpoint,
