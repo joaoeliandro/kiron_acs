@@ -8,6 +8,8 @@ defmodule KironAcsWeb.Router do
   scope "/", KironAcsWeb do
     pipe_through :api
 
+    post "/sessions", SessionsController, :create
+
     post "/agents", AgentsController, :create
 
     post "/pregnants", PregnantsController, :create
