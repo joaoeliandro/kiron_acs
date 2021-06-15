@@ -7,4 +7,11 @@ defmodule KironAcs.Agents.Get do
       agent -> {:ok, agent}
     end
   end
+
+  def by_number_registration(number_registration) do
+    case Repo.get_by(Agent, number_registration: number_registration) do
+      nil -> {:error, "Agent not found!"}
+      agent -> {:ok, agent}
+    end
+  end
 end
