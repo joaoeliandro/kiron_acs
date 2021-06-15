@@ -43,7 +43,7 @@ defmodule KironAcs.Pregnant do
     :agent_id
   ]
 
-  @derive {Jason.Encoder, only: @required_params ++ [:id]}
+  @derive {Jason.Encoder, only: @params ++ [:id]}
 
   schema "pregnants" do
     field :birthday, :date
