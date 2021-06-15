@@ -9,6 +9,9 @@ defmodule KironAcsWeb.Router do
     pipe_through :api
 
     post "/agents", AgentsController, :create
+
+    post "/pregnants", PregnantsController, :create
+    get "/pregnants/agents/:agent_id", PregnantsController, :get_all_by_agent_id
   end
 
   # Enables LiveDashboard only for development
