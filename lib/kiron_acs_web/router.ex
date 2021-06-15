@@ -5,8 +5,22 @@ defmodule KironAcsWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :auth do
+    plug KironAcsWeb.Auth.Pipeline
+  end
+
+  scope "/", KironAcsWeb do
+    pipe_through [:api, :auth]
+
+    post "/pregnants", PregnantsController, :create
+    get "/pregnants", PregnantsController, :show
+    get "/pregnants/agents/:agent_id", PregnantsController, :get_all_by_agent_id
+  end
+
   scope "/", KironAcsWeb do
     pipe_through :api
+
+    post "/sessions", SessionsController, :create
 
     post "/agents", AgentsController, :create
   end

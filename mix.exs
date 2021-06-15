@@ -50,8 +50,13 @@ defmodule KironAcs.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:excoveralls, "~> 0.10", only: :test},
-      {:credo, "~> 1.5", only: [:dev, :test], runtime: false}
+      {:guardian, "~> 2.0"},
+
+      # DEV TEST
+      {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
+
+      # TEST
+      {:excoveralls, "~> 0.10", only: :test}
     ]
   end
 

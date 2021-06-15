@@ -14,6 +14,16 @@ config :kiron_acs, KironAcs.Repo,
   migration_primary_key: [type: :binary_id],
   migration_foreign_key: [type: :binary_id]
 
+# TODO
+# MUDAR O SECRET PARA UMA ENV
+config :kiron_acs, KironAcsWeb.Auth.Guardian,
+  issuer: "kiron_acs",
+  secret_key: "3oKUNIjehZKtrEWFAtLXL/4BfEfHNZw1RflRFJT1n1z7/ecTzu7Fl+Yt1Q0Vf+HE"
+
+config :kiron_acs, KironAcsWeb.Auth.Pipeline,
+  module: KironAcsWeb.Auth.Guardian,
+  error_handler: KironAcsWeb.Auth.ErrorHandler
+
 # Configures the endpoint
 config :kiron_acs, KironAcsWeb.Endpoint,
   url: [host: "localhost"],

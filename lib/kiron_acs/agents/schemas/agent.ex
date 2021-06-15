@@ -2,14 +2,16 @@ defmodule KironAcs.Agent do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias KironAcs.Pregnant
+
   @primary_key {:id, :binary_id, autogenerate: true}
-  # @foreign_key_type :binary_id
 
   @required_params [
     :number_cns,
     :number_cbo,
     :number_cnes,
     :number_ine,
+    :number_registration,
     :full_name,
     :email
   ]
@@ -23,6 +25,9 @@ defmodule KironAcs.Agent do
     field :number_cnes, :string
     field :number_cns, :string
     field :number_ine, :string
+    field :number_registration, :string
+
+    has_many :pregnants, Pregnant
 
     timestamps()
   end
@@ -36,7 +41,8 @@ defmodule KironAcs.Agent do
     |> validate_length(:number_ine, is: 10)
     |> validate_length(:number_cns, is: 15)
     |> validate_format(:email, ~r/@/)
-    |> unique_constraint(:number_cns)
     |> unique_constraint(:email)
+    |> unique_constraint(:number_cns)
+    |> unique_constraint(:number_registration)
   end
 end
