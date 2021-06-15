@@ -15,12 +15,14 @@ defmodule KironAcsWeb.Auth.Guardian do
   def authenticate(%{"number_registration" => number_registration}) do
     with {:ok, %Agent{} = agent} <-
            AgentGet.by_number_registration(number_registration),
-         {:ok, token, _claims} <- encode_and_sign(agent) do
+         {:ok, token, _claims} <- encode_and_sign(agent, %{}, ttl: {15, :hours}) do
       {:ok, token}
     else
       error -> error
     end
   end
 
+  # TODO
+  # Ajustar retorno dos erros
   def authenticate(_), do: {:error, "Invalid or missing params!"}
 end

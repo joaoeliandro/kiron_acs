@@ -9,7 +9,7 @@ defmodule KironAcsWeb.AgentsController do
 
   def create(conn, params) do
     with {:ok, %Agent{} = agent} <- KironAcs.create_agent(params),
-         {:ok, token, _claims} <- Guardian.encode_and_sign(agent) do
+         {:ok, token, _claims} <- Guardian.encode_and_sign(agent, %{}, ttl: {15, :hours}) do
       conn
       |> put_status(:created)
       |> render("create.json", token: token, agent: agent)
