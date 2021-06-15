@@ -3,7 +3,7 @@ defmodule KironAcsWeb.PregnantsView do
 
   alias KironAcs.Pregnant
 
-  def render("create.json", %{pregnant: pregnant}) do
+  def render("create.json", %{pregnant: %Pregnant{} = pregnant}) do
     pregnant
   end
 
