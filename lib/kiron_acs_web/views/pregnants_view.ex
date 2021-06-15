@@ -7,6 +7,12 @@ defmodule KironAcsWeb.PregnantsView do
     pregnant
   end
 
+  def render("list_pregnants.json", %{pregnants: [%Pregnant{} | _tail] = pregnants}) do
+    %{
+      pregnants: pregnants
+    }
+  end
+
   def render("list_pregnants_by_agent_id.json", %{pregnants: [%Pregnant{} | _tail] = pregnants}) do
     %{
       pregnants: pregnants
