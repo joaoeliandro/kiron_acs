@@ -11,6 +11,7 @@ defmodule KironAcs.Agent do
     :number_cbo,
     :number_cnes,
     :number_ine,
+    :number_registration,
     :full_name,
     :email
   ]
@@ -24,6 +25,7 @@ defmodule KironAcs.Agent do
     field :number_cnes, :string
     field :number_cns, :string
     field :number_ine, :string
+    field :number_registration, :string
 
     has_many :pregnants, Pregnant
 
@@ -39,7 +41,8 @@ defmodule KironAcs.Agent do
     |> validate_length(:number_ine, is: 10)
     |> validate_length(:number_cns, is: 15)
     |> validate_format(:email, ~r/@/)
-    |> unique_constraint(:number_cns)
     |> unique_constraint(:email)
+    |> unique_constraint(:number_cns)
+    |> unique_constraint(:number_registration)
   end
 end
