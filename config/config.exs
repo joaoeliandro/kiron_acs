@@ -20,6 +20,10 @@ config :kiron_acs, KironAcsWeb.Auth.Guardian,
   issuer: "kiron_acs",
   secret_key: "3oKUNIjehZKtrEWFAtLXL/4BfEfHNZw1RflRFJT1n1z7/ecTzu7Fl+Yt1Q0Vf+HE"
 
+config :kiron_acs, KironAcsWeb.Auth.Pipeline,
+  module: KironAcsWeb.Auth.Guardian,
+  error_handler: KironAcsWeb.Auth.ErrorHandler
+
 # Configures the endpoint
 config :kiron_acs, KironAcsWeb.Endpoint,
   url: [host: "localhost"],
