@@ -8,4 +8,5 @@ defmodule KironAcs do
 
   defdelegate create_pregnant(params), to: PregnantsCreate, as: :call
   defdelegate get_pregnants_by_agent_id(agent_id), to: PregnantsGet, as: :get_all_by_agent_id
+  defdelegate get_all_pregnants(), to: PregnantsGet, as: :get_all
 end
