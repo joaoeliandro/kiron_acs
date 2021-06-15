@@ -3,6 +3,7 @@ defmodule KironAcs.Repo.Migrations.CreateAgents do
 
   def change do
     create table :agents do
+      add :number_registration, :string, null: false
       add :number_cns, :string
       add :number_cbo, :string
       add :number_cnes, :string
@@ -13,6 +14,7 @@ defmodule KironAcs.Repo.Migrations.CreateAgents do
       timestamps()
     end
 
+    create unique_index(:agents, [:number_registration])
     create unique_index(:agents, [:number_cns])
     create unique_index(:agents, [:email])
   end
