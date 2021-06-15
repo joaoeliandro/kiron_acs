@@ -11,6 +11,7 @@ defmodule KironAcsWeb.Router do
     post "/agents", AgentsController, :create
 
     post "/pregnants", PregnantsController, :create
+    get "/pregnants", PregnantsController, :show
     get "/pregnants/agents/:agent_id", PregnantsController, :get_all_by_agent_id
   end
 
