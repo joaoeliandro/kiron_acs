@@ -2,7 +2,7 @@ defmodule KironAcs.Agent do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias KironAcs.Pregnant
+  alias KironAcs.{Pregnant, Recomendation}
 
   @primary_key {:id, :binary_id, autogenerate: true}
 
@@ -28,6 +28,7 @@ defmodule KironAcs.Agent do
     field :number_registration, :string
 
     has_many :pregnants, Pregnant
+    has_many :recomendations, Recomendation
 
     timestamps()
   end

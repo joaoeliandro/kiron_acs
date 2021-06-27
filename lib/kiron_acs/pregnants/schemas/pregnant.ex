@@ -2,7 +2,7 @@ defmodule KironAcs.Pregnant do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias KironAcs.Agent
+  alias KironAcs.{Agent, Recomendation}
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
@@ -14,6 +14,9 @@ defmodule KironAcs.Pregnant do
     :nationality,
     :country_birth,
     :city_birth,
+    :prenatal,
+    :postpartum,
+    :period_month,
     :agent_id
   ]
 
@@ -40,6 +43,9 @@ defmodule KironAcs.Pregnant do
     :checkin_brazil_date,
     :phone,
     :email,
+    :prenatal,
+    :postpartum,
+    :period_month,
     :agent_id
   ]
 
@@ -68,7 +74,12 @@ defmodule KironAcs.Pregnant do
     field :number_cns, :string
     field :number_nis, :string
     field :phone, :string
+    field :prenatal, :boolean
+    field :postpartum, :boolean
+    field :period_month, :string
     field :race_color, :string
+
+    has_many :recomendations, Recomendation
 
     belongs_to :agent, Agent
 
@@ -88,5 +99,6 @@ defmodule KironAcs.Pregnant do
     |> unique_constraint(:number_cns)
     |> unique_constraint(:family_responsible_cns)
     |> unique_constraint(:family_responsible_cpf)
+    |> check_constraint(:period_month, name: :period_month_must_be_positive)
   end
 end
