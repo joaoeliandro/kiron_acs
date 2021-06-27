@@ -17,6 +17,12 @@ defmodule KironAcsWeb.Router do
     get "/pregnants/agents/:agent_id", PregnantsController, :get_all_by_agent_id
 
     post "/recomendations", RecomendationsController, :create
+    get "/recomendations", RecomendationsController, :show
+    get "/recomendations/agents/:agent_id", RecomendationsController, :get_all_by_agent_id
+
+    get "/recomendations/pregnants/:pregnant_id",
+        RecomendationsController,
+        :get_all_by_pregnant_id
   end
 
   scope "/", KironAcsWeb do
