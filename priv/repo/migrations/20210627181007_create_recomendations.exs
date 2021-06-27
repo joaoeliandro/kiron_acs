@@ -9,6 +9,5 @@ defmodule KironAcs.Repo.Migrations.CreateRecomendations do
 
       timestamps()
     end
-
   end
 end
