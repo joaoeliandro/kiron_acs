@@ -13,7 +13,7 @@ defmodule KironAcs.Recomendation do
     :pregnant_id
   ]
 
-  @derive {Jason.Encoder, only: @required_params ++ [:id]}
+  @derive {Jason.Encoder, only: @required_params ++ [:id, :agent]}
 
   schema "recomendations" do
     field :description, :string
