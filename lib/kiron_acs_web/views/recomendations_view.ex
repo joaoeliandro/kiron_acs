@@ -8,15 +8,13 @@ defmodule KironAcsWeb.RecomendationsView do
   end
 
   def render("list_recomendations.json", %{
-        recomendations: [%Recomendation{} | _tail] = recomendations
+        recomendations: recomendations
       }) do
-    %{
-      recomendations: recomendations
-    }
+    recomendations
   end
 
   def render("list_recomendations_by_agent_id.json", %{
-        recomendations: [%Recomendation{} | _tail] = recomendations
+        recomendations: recomendations
       }) do
     %{
       recomendations: recomendations
@@ -24,7 +22,7 @@ defmodule KironAcsWeb.RecomendationsView do
   end
 
   def render("list_recomendations_by_pregnant_id.json", %{
-        recomendations: [%Recomendation{} | _tail] = recomendations
+        recomendations: recomendations
       }) do
     %{
       recomendations: recomendations
