@@ -76,7 +76,7 @@ defmodule KironAcs.Pregnant do
     field :phone, :string
     field :prenatal, :boolean
     field :postpartum, :boolean
-    field :period_month, :string
+    field :period_month, :integer
     field :race_color, :string
 
     has_many :recomendations, Recomendation

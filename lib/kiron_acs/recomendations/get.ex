@@ -67,7 +67,7 @@ defmodule KironAcs.Recomendations.Get do
   end
 
   defp preload_data(repo, recomendations) do
-    {:ok, repo.preload(recomendations, [:agent, :pregnant])}
+    {:ok, repo.preload(recomendations, [:agent, pregnant: [:agent]])}
   end
 
   defp run_transaction(multi) do
