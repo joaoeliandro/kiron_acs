@@ -4,13 +4,13 @@ defmodule KironAcsWeb.RecomendationsView do
   alias KironAcs.Recomendation
 
   def render("create.json", %{recomendation: %Recomendation{} = recomendation}) do
-    render_one(recomendation, __MODULE__, "recomendation.json")
+    recomendation
   end
 
   def render("list_recomendations.json", %{
         recomendations: recomendations
       }) do
-    render_many(recomendations, KironAcsWeb.RecomendationsView, "recomendation.json")
+    recomendations
   end
 
   def render("list_recomendations_by_agent_id.json", %{
@@ -27,9 +27,5 @@ defmodule KironAcsWeb.RecomendationsView do
     %{
       recomendations: recomendations
     }
-  end
-
-  def render("recomendation.json", %{recomendations: %Recomendation{} = recomendation}) do
-    recomendation
   end
 end
