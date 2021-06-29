@@ -25,7 +25,7 @@ defmodule KironAcsWeb.Auth.Guardian do
     with {:ok, agent} <-
            SessionGet.by_user({:number_registration, number_registration}),
          {:ok, token, _claims} <- encode_and_sign(agent, %{}, ttl: {15, :hours}) do
-      {:ok, token}
+      {:ok, token, agent.id}
     else
       error -> error
     end
