@@ -15,6 +15,14 @@ defmodule KironAcsWeb.PregnantsController do
     end
   end
 
+  def helper_mail(conn, params) do
+    with {:ok, message} <- KironAcs.send_helper_mail(params) do
+      conn
+      |> put_status(:ok)
+      |> render("helper_mail.json", message: message)
+    end
+  end
+
   def show(conn, _params) do
     task = Task.async(fn -> KironAcs.get_all_pregnants() end)
 

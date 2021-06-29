@@ -1,21 +1,40 @@
 defmodule KironAcsWeb.Auth.Guardian do
   use Guardian, otp_app: :kiron_acs
 
-  alias KironAcs.Agent
-  alias KironAcs.Agents.Get, as: AgentGet
+  alias KironAcs.{Agent, Pregnant}
 
-  def subject_for_token(%Agent{id: id}, _claims), do: {:ok, id}
+  alias KironAcs.Sessions.Get, as: SessionGet
+
+  def subject_for_token(%Agent{id: id}, _claims) do
+    sub = %{id: id, type: :agent}
+    {:ok, sub}
+  end
+
+  def subject_for_token(%Pregnant{id: id}, _claims) do
+    sub = %{id: id, type: :pregnant}
+    {:ok, sub}
+  end
 
   def resource_from_claims(claims) do
     claims
     |> Map.get("sub")
-    |> AgentGet.by_id()
+    |> SessionGet.by_id()
   end
 
   def authenticate(%{"number_registration" => number_registration}) do
-    with {:ok, %Agent{} = agent} <-
-           AgentGet.by_number_registration(number_registration),
+    with {:ok, agent} <-
+           SessionGet.by_user({:number_registration, number_registration}),
          {:ok, token, _claims} <- encode_and_sign(agent, %{}, ttl: {15, :hours}) do
+      {:ok, token}
+    else
+      error -> error
+    end
+  end
+
+  def authenticate(%{"cpf" => cpf}) do
+    with {:ok, pregnant} <-
+           SessionGet.by_user({:cpf, cpf}),
+         {:ok, token, _claims} <- encode_and_sign(pregnant, %{}, ttl: {15, :hours}) do
       {:ok, token}
     else
       error -> error
