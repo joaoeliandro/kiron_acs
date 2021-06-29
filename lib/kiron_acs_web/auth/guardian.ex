@@ -35,7 +35,7 @@ defmodule KironAcsWeb.Auth.Guardian do
     with {:ok, pregnant} <-
            SessionGet.by_user({:cpf, cpf}),
          {:ok, token, _claims} <- encode_and_sign(pregnant, %{}, ttl: {15, :hours}) do
-      {:ok, token}
+      {:ok, token, pregnant.id}
     else
       error -> error
     end
