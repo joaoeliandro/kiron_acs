@@ -52,6 +52,17 @@ defmodule KironAcs.Pregnants.Get do
     |> run_transaction()
   end
 
+  def get_all_by_situation(agent_id, situation) do
+    Multi.new()
+    |> Multi.run(:list_pregnants_by_situation, fn repo, _changes ->
+      get_pregnants_by_situation(repo, agent_id, situation)
+    end)
+    |> Multi.run(:preload_data, fn repo, %{list_pregnants_by_situation: pregnants} ->
+      preload_data(repo, pregnants)
+    end)
+    |> run_transaction()
+  end
+
   defp get_all_pregnants(repo) do
     list_pregnants =
       Pregnant
@@ -62,6 +73,26 @@ defmodule KironAcs.Pregnants.Get do
 
   defp get_pregnants_by_agent_id(repo, agent_id) do
     query = from(p in Pregnant, where: p.agent_id == ^agent_id)
+
+    list_pregnants =
+      query
+      |> repo.all()
+
+    List.to_tuple([:ok, list_pregnants])
+  end
+
+  defp get_pregnants_by_situation(repo, agent_id, situation) when situation == "prenatal" do
+    query = from(p in Pregnant, where: p.prenatal == ^true and p.agent_id == ^agent_id)
+
+    list_pregnants =
+      query
+      |> repo.all()
+
+    List.to_tuple([:ok, list_pregnants])
+  end
+
+  defp get_pregnants_by_situation(repo, agent_id, situation) when situation == "postpartum" do
+    query = from(p in Pregnant, where: p.postpartum == ^true and p.agent_id == ^agent_id)
 
     list_pregnants =
       query
