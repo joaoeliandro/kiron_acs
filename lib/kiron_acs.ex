@@ -3,6 +3,7 @@ defmodule KironAcs do
 
   alias KironAcs.Pregnants.Create, as: PregnantsCreate
   alias KironAcs.Pregnants.Get, as: PregnantsGet
+  alias KironAcs.Pregnants.Mail.HelperNotification, as: PregnantsProvidersHelperMail
 
   alias KironAcs.Recomendations.Create, as: RecomendationsCreate
   alias KironAcs.Recomendations.Get, as: RecomendationsGet
@@ -12,6 +13,7 @@ defmodule KironAcs do
   defdelegate create_pregnant(params), to: PregnantsCreate, as: :call
   defdelegate get_all_pregnants(), to: PregnantsGet, as: :get_all
   defdelegate get_pregnants_by_agent_id(agent_id), to: PregnantsGet, as: :get_all_by_agent_id
+  defdelegate send_helper_mail(params), to: PregnantsProvidersHelperMail, as: :send
 
   defdelegate create_recomendation(params), to: RecomendationsCreate, as: :call
   defdelegate get_all_recomendations(), to: RecomendationsGet, as: :get_all

@@ -15,6 +15,7 @@ defmodule KironAcsWeb.Router do
     post "/pregnants", PregnantsController, :create
     get "/pregnants", PregnantsController, :show
     get "/pregnants/agents/:agent_id", PregnantsController, :get_all_by_agent_id
+    post "/pregnants/help", PregnantsController, :helper_mail
 
     post "/recomendations", RecomendationsController, :create
     get "/recomendations", RecomendationsController, :show
@@ -49,4 +50,8 @@ defmodule KironAcsWeb.Router do
   end
 
   # end
+
+  if Mix.env() == :dev do
+    forward "/sent_emails", Bamboo.SentEmailViewerPlug
+  end
 end
