@@ -5,6 +5,20 @@ defmodule KironAcs.Pregnants.Get do
 
   alias KironAcs.{Pregnant, Repo}
 
+  def by_id(id) do
+    case Repo.get(Pregnant, id) do
+      nil -> {:error, "Pregnant not found!"}
+      pregnant -> {:ok, pregnant}
+    end
+  end
+
+  def by_cpf(cpf) do
+    case Repo.get_by(Pregnant, cpf: cpf) do
+      nil -> {:error, "Pregnant not found!"}
+      pregnant -> {:ok, pregnant}
+    end
+  end
+
   def get_all do
     Multi.new()
     |> Multi.run(:list_pregnants, fn repo, _changes ->
