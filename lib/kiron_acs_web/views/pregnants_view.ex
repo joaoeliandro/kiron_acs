@@ -18,4 +18,10 @@ defmodule KironAcsWeb.PregnantsView do
       pregnants: pregnants
     }
   end
+
+  def render("helper_mail.json", %{message: message}) do
+    %{
+      message: message
+    }
+  end
 end
