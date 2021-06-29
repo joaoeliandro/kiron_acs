@@ -14,8 +14,9 @@ defmodule KironAcsWeb.Router do
 
     post "/pregnants", PregnantsController, :create
     get "/pregnants", PregnantsController, :show
-    get "/pregnants/agents/:agent_id", PregnantsController, :get_all_by_agent_id
+    get "/pregnants/all/:agent_id", PregnantsController, :get_all_by_agent_id
     post "/pregnants/help", PregnantsController, :helper_mail
+    get "/pregnants/:agent_id", PregnantsController, :get_all_by_situation
 
     post "/recomendations", RecomendationsController, :create
     get "/recomendations", RecomendationsController, :show
