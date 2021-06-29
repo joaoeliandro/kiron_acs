@@ -39,7 +39,17 @@ defmodule KironAcsWeb.PregnantsController do
     with {:ok, pregnants} <- Task.await(task) do
       conn
       |> put_status(:ok)
-      |> render("list_pregnants_by_agent_id.json", pregnants: pregnants)
+      |> render("list_pregnants.json", pregnants: pregnants)
+    end
+  end
+
+  def get_all_by_situation(conn, %{"agent_id" => agent_id, "situation" => situation}) do
+    task = Task.async(fn -> KironAcs.get_pregnants_by_situation(agent_id, situation) end)
+
+    with {:ok, pregnants} <- Task.await(task) do
+      conn
+      |> put_status(:ok)
+      |> render("list_pregnants.json", pregnants: pregnants)
     end
   end
 end
