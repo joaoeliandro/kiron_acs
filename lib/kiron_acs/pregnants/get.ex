@@ -5,6 +5,17 @@ defmodule KironAcs.Pregnants.Get do
 
   alias KironAcs.{Pregnant, Repo}
 
+  def get_by_id_preload(id) do
+    Multi.new()
+    |> Multi.run(:get_pregnant, fn _repo, _changes ->
+      by_id(id)
+    end)
+    |> Multi.run(:preload_data, fn repo, %{get_pregnant: pregnant} ->
+      preload_data(repo, pregnant)
+    end)
+    |> run_transaction()
+  end
+
   def by_id(id) do
     case Repo.get(Pregnant, id) do
       nil -> {:error, "Pregnant not found!"}
