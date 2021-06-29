@@ -20,3 +20,5 @@ config :kiron_acs, KironAcsWeb.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+config :kiron_acs, KironAcs.Mailer, adapter: Bamboo.TestAdapter

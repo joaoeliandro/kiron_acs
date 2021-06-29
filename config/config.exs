@@ -24,6 +24,8 @@ config :kiron_acs, KironAcsWeb.Auth.Pipeline,
   module: KironAcsWeb.Auth.Guardian,
   error_handler: KironAcsWeb.Auth.ErrorHandler
 
+config :kiron_acs, KironAcs.Mailer, adapter: Bamboo.LocalAdapter
+
 # Configures the endpoint
 config :kiron_acs, KironAcsWeb.Endpoint,
   url: [host: "localhost"],
